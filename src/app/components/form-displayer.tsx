@@ -9,6 +9,7 @@ import Content from "./form-components/content";
 import Panel from "./form-components/panel";
 import Signature from "./form-components/signature";
 import Date from "./form-components/date";
+import Radio from "./form-components/radio";
 
 interface FormDisplayerProps {
     filePath: string,
@@ -20,6 +21,7 @@ interface FormData {
 
 export default function FormDisplayer({ filePath }:FormDisplayerProps) {
     const [displayHTML, setDisplayHTML] = useState<React.ReactNode>();
+    const [formData, setFormData] = useState({});
 
     useEffect(() => {
         const getFormData = async () => {
@@ -30,6 +32,7 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
                 }
                 const data = await response.json();
                 console.log(data);
+                setFormData(data);
                 setDisplayHTML(displayFormData(data));
             }
             catch (error) {
@@ -75,6 +78,11 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
                         required={data['validate']['required']} />
                 case "locationlogo":
                     return <LocationLogo key={index} />
+                case "radio":
+                    return <Radio
+                        key={index}
+                        label={data['label']}
+                        required={data['validate']['required']} />
                 case "signature":
                     return <Signature
                         key={index}
