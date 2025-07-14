@@ -15,7 +15,9 @@ export default function LabelContainer({ label, showLabel, sublabel, required, c
     const remainingColumnSize = columnSizes != null ? 12 - columnSizes.reduce((acc, num) => acc + num, 0) : 0;
 
     return (
-        <div className={`relative p-4 rounded-md ${className}`}>
+        <div className={`relative p-4 rounded-md ${className} relative overflow-hidden`}>
+            <div className="absolute top-0 right-0 w-4 h-4 bg-zinc-400 cursor-pointer rounded-bl-md"></div>
+
             {icon && <div className="grid place-items-center inset-0 absolute">{icon}</div>}
             {showLabel && <h2 className={required ? "required" : ""}>{label}</h2>}
             <p className="text-xs opacity-50 italic">{sublabel}</p>

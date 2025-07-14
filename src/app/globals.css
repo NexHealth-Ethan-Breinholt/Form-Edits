@@ -8,3 +8,7 @@ body {
   content: " *";
   color: red;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}

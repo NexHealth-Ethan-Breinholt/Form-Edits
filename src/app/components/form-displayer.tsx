@@ -16,10 +16,6 @@ interface FormDisplayerProps {
     filePath: string,
 }
 
-interface FormData {
-    components: { [key: string]: any },
-}
-
 export default function FormDisplayer({ filePath }:FormDisplayerProps) {
     const { formData, setFormData } = useFormContext();
 
@@ -50,7 +46,7 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
             if (!("components" in data)) {
                 return <div>No data to display...</div>
             }
-            
+
             const children = data['components'].map((component: string, index: number) => {
                 return exploreComponent(component, index);
             });
