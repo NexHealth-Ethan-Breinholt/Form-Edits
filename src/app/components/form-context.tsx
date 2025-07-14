@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 interface FormContextType {
     formData: any,
@@ -21,4 +21,12 @@ export default function FormContext({ children }:FormContextProps) {
             {children}
         </FormDataContext>
     )
+}
+
+export const useFormContext = () => {
+    const context = useContext(FormDataContext);
+    if (!context) {
+        throw new Error("useFormContext does not exist! Was it used outside of the FormContext?");
+    }
+    return context;
 }
