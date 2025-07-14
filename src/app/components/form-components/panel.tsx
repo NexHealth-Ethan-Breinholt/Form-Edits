@@ -1,15 +1,12 @@
+import LabelContainer from "./label-container";
+
 interface PanelProps {
-    name: string,
+    label: string,
     children: React.ReactNode,
 }
 
-export default function Panel({name, children}: PanelProps) {
+export default function Panel({ label, children }: PanelProps) {
     return (
-        <div className="text-zinc-100 p-4 rounded-md bg-zinc-800">
-            <h2 className="font-bold">{name}</h2>
-            <div className="pt-4 gap-2 flex flex-col">
-                {children}
-            </div>
-        </div>
+        <LabelContainer label={label} showLabel={true} sublabel="Panel" required={false} className={"bg-zinc-800 text-zinc-100"} columnSizes={[12]} columnContent={[children]} />
     );
 }

@@ -7,6 +7,6 @@ interface TextfieldProps {
 
 export default function Textfield({ label, required }: TextfieldProps) {
     return (
-        <LabelContainer label={label} sublabel="Textfield" required={required} className={"bg-green-100 text-green-800"} />
+        <LabelContainer label={label} showLabel={true} sublabel="Textfield" required={required} className={"bg-green-100 text-green-800"} />
     );
 }
