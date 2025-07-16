@@ -1,5 +1,7 @@
 import React from "react";
 
+import { FaGear } from "react-icons/fa6";
+
 interface LabelContainerProps {
     label: string,
     showLabel: boolean,
@@ -16,7 +18,9 @@ export default function LabelContainer({ label, showLabel, sublabel, required, c
 
     return (
         <div className={`relative p-4 rounded-md ${className} relative overflow-hidden`}>
-            <div className="absolute top-0 right-0 w-4 h-4 bg-zinc-400 cursor-pointer rounded-bl-md"></div>
+            <div className="absolute top-0 right-0 pl-[1px] pb-[1px] w-4 h-4 outline-2 outline-zinc-700 hover:brightness-125 transition text-zinc-700 cursor-pointer rounded-bl-md grid place-items-center">
+                <FaGear size={10} />
+            </div>
 
             {icon && <div className="grid place-items-center inset-0 absolute">{icon}</div>}
             {showLabel && <h2 className={required ? "required" : ""}>{label}</h2>}
