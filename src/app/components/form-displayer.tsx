@@ -11,6 +11,7 @@ import Signature from "./form-components/signature";
 import Date from "./form-components/date";
 import Radio from "./form-components/radio";
 import { useFormContext } from "./form-context";
+import Unimplemented from "./form-components/unimplemented";
 
 interface FormDisplayerProps {
     filePath: string,
@@ -98,12 +99,16 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
                     return <Textfield
                         key={index}
                         label={data['label']}
-                        required={data['validate']['required']} />;
+                        required={data['validate']['required']} />
                 case "paymentmethod":
                     return <PaymentMethod
                         key={index}
                         label={data['label']}
                         required={data['validate']['required']} />
+                default:
+                    return <Unimplemented 
+                        key={index}    
+                        type={type} />
             }
         }
 
