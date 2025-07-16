@@ -75,16 +75,22 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
                         columnContents.push(<>{columnElements}</>);
                     }
 
-                    return <Columns key={index} columnSizes={columnSizes} columnsContent={columnContents} />;
+                    return <Columns
+                        key={index}
+                        columnSizes={columnSizes}
+                        columnsContent={columnContents} />;
                 case "content":
-                    return <Content key={index} label={data['html']} />
+                    return <Content
+                        key={index}
+                        label={data['html']} />
                 case "date":
                     return <Date
                         key={index}
                         label={data['label']}
                         required={data['validate']['required']} />
                 case "locationlogo":
-                    return <LocationLogo key={index} />
+                    return <LocationLogo
+                        key={index} />
                 case "radio":
                     return <Radio
                         key={index}
