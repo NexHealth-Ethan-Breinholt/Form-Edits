@@ -11,16 +11,17 @@ interface LabelContainerProps {
     icon?: React.ReactNode,
     columnSizes?: number[],
     columnContent?: React.ReactNode[],
+    showSettingsButton?: boolean,
 }
 
-export default function LabelContainer({ label, showLabel, sublabel, required, className, icon, columnSizes, columnContent }: LabelContainerProps) {
+export default function LabelContainer({ label, showLabel, sublabel, required, className, icon, columnSizes, columnContent, showSettingsButton = true }: LabelContainerProps) {
     const remainingColumnSize = columnSizes != null ? 12 - columnSizes.reduce((acc, num) => acc + num, 0) : 0;
 
     return (
         <div className={`relative p-4 rounded-md ${className} relative overflow-hidden`}>
-            <div className="absolute top-0 right-0 pl-[1px] pb-[1px] w-4 h-4 outline-2 outline-zinc-700 hover:brightness-125 transition text-zinc-700 cursor-pointer rounded-bl-md grid place-items-center">
+            {showSettingsButton && <button className="absolute top-0 right-0 pl-[1px] pb-[1px] w-4 h-4 outline-2 outline-zinc-700 hover:brightness-125 transition text-zinc-700 rounded-bl-md grid place-items-center">
                 <FaGear size={10} />
-            </div>
+            </button>}
 
             {icon && <div className="grid place-items-center inset-0 absolute">{icon}</div>}
             {showLabel && <h2 className={required ? "required" : ""}>{label}</h2>}
