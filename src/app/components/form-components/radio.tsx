@@ -7,6 +7,6 @@ interface RadioProps {
 
 export default function Radio({ label, required }: RadioProps) {
     return (
-        <LabelContainer label={label} showLabel={true} sublabel="Radio" required={required} className={"bg-green-100 text-green-800"} />
+        <LabelContainer label={label} showLabel={true} sublabel="Radio" required={required} className={"bg-green-100 text-green-800 border border-green-300"} />
     );
 }

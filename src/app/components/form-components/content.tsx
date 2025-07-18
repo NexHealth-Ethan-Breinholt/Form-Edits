@@ -6,6 +6,6 @@ interface ContentProps {
 
 export default function Content({ label }: ContentProps) {
     return (
-        <LabelContainer label={label} showLabel={true} sublabel="Content" className={"bg-yellow-100 text-yellow-800"} />
+        <LabelContainer label={label} showLabel={true} sublabel="Content" className={"bg-yellow-100 text-yellow-800 border border-yellow-300"} />
     );
 }

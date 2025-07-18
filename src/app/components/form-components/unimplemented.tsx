@@ -6,6 +6,6 @@ interface UnimplementedProps {
 
 export default function Unimplemented({ type }: UnimplementedProps) {
     return (
-        <LabelContainer label="Unimplemented Component" showLabel={true} sublabel={type} required={false} className={"bg-zinc-100 text-zinc-800"} showSettingsButton={false} />
+        <LabelContainer label="Unimplemented Component" showLabel={true} sublabel={type} required={false} className={"bg-zinc-100 text-zinc-800 border border-zinc-300"} showSettingsButton={false} />
     );
 }

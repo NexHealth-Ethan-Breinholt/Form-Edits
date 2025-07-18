@@ -10,6 +10,7 @@ export default function Home() {
           <div className="py-8 px-16 overflow-y-scroll">
             <div className="max-w-3xl m-auto">
               <FormDisplayer filePath="/form-examples/med-history-conditions.json" />
+              {/* <FormDisplayer filePath="/form-examples/cc-authorization.json" /> */}
             </div>
           </div>
           <div className="sticky right-0 top-0 bottom-0 bg-zinc-800 text-white p-8">

@@ -7,6 +7,6 @@ interface PanelProps {
 
 export default function Panel({ label, children }: PanelProps) {
     return (
-        <LabelContainer label={label} showLabel={true} sublabel="Panel" required={false} className={"bg-zinc-800 text-zinc-100"} columnSizes={[12]} columnContent={[children]} />
+        <LabelContainer label={label} showLabel={true} sublabel="Panel" required={false} className={"bg-white border-zinc-300 border shadow text-zinc-700"} columnSizes={[12]} columnContent={[children]} />
     );
 }

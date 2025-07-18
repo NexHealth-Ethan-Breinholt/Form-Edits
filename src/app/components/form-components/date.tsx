@@ -7,6 +7,6 @@ interface DateProps {
 
 export default function Date({ label, required }: DateProps) {
     return (
-        <LabelContainer label={label} showLabel={true} sublabel="Date" required={required} className={"bg-indigo-100 text-indigo-800"} />
+        <LabelContainer label={label} showLabel={true} sublabel="Date" required={required} className={"bg-indigo-100 text-indigo-800 border border-indigo-400"} />
     );
 }

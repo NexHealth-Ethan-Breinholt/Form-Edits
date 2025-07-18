@@ -19,7 +19,7 @@ export default function LabelContainer({ label, showLabel, sublabel, required, c
 
     return (
         <div className={`relative p-4 rounded-md ${className} relative overflow-hidden`}>
-            {showSettingsButton && <button className="absolute top-0 right-0 pl-[1px] pb-[1px] w-4 h-4 outline-2 outline-zinc-700 hover:brightness-125 transition text-zinc-700 rounded-bl-md grid place-items-center">
+            {showSettingsButton && <button className="absolute top-2 right-2 p-1 bg-white border border-zinc-300 text-zinc-500 rounded-md grid place-items-center">
                 <FaGear size={10} />
             </button>}
 
