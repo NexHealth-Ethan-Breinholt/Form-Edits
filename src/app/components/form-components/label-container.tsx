@@ -17,6 +17,9 @@ interface LabelContainerProps {
     showSettingsButton?: boolean,
 }
 
+const contextMenuHorizontalOffset = 4;
+const contextMenuVerticalOffset = -10;
+
 export default function LabelContainer({ componentType, label, showLabel, sublabel, path, required, className, icon, columnSizes, columnContent, showSettingsButton = true }: LabelContainerProps) {
     const remainingColumnSize = columnSizes != null ? 12 - columnSizes.reduce((acc, num) => acc + num, 0) : 0;
 
@@ -30,8 +33,8 @@ export default function LabelContainer({ componentType, label, showLabel, sublab
                     type: componentType,
                     path: path,
                     gearPosition: {
-                        "left": rect.right + window.scrollX,
-                        "top": rect.top + window.scrollY,
+                        "left": rect.right + window.scrollX + contextMenuHorizontalOffset,
+                        "top": rect.top + window.scrollY + contextMenuVerticalOffset,
                     }
                 });
                 setShowContextMenu(true);
