@@ -1,11 +1,14 @@
 import React from "react";
 
 import { FaGear } from "react-icons/fa6";
+import { useFormContext } from "../form-context";
 
 interface LabelContainerProps {
+    componentType: string,
     label: string,
     showLabel: boolean,
     sublabel: string,
+    path: string,
     required?: boolean,
     className?: string,
     icon?: React.ReactNode,
@@ -14,12 +17,25 @@ interface LabelContainerProps {
     showSettingsButton?: boolean,
 }
 
-export default function LabelContainer({ label, showLabel, sublabel, required, className, icon, columnSizes, columnContent, showSettingsButton = true }: LabelContainerProps) {
+export default function LabelContainer({ componentType, label, showLabel, sublabel, path, required, className, icon, columnSizes, columnContent, showSettingsButton = true }: LabelContainerProps) {
     const remainingColumnSize = columnSizes != null ? 12 - columnSizes.reduce((acc, num) => acc + num, 0) : 0;
+
+    const { selectedComponent, setSelectedComponent, setShowContextMenu } = useFormContext();
 
     return (
         <div className={`relative p-4 rounded-md ${className} relative overflow-hidden`}>
-            {showSettingsButton && <button className="absolute top-2 right-2 p-1 text-tealgreen rounded-md grid place-items-center">
+            {showSettingsButton && <button onClick={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                setSelectedComponent({
+                    type: componentType,
+                    path: path,
+                    gearPosition: {
+                        "left": rect.right + window.scrollX,
+                        "top": rect.top + window.scrollY,
+                    }
+                });
+                setShowContextMenu(true);
+            }} className={`absolute top-2 right-2 p-1 text-tealgreen rounded-md grid place-items-center z-10 ${selectedComponent.path === path ? "" : ""}`}>
                 <FaGear size={10} />
             </button>}
 

@@ -1,8 +1,12 @@
 import LabelContainer from "./label-container";
 import { FaImage } from "react-icons/fa6";
 
-export default function LocationLogo() {
+interface LocationLogoProps {
+    path: string,
+}
+
+export default function LocationLogo({ path }: LocationLogoProps) {
     return (
-        <LabelContainer label="" showLabel={false} sublabel="Location Logo" className={"bg-blue-100 text-blue-800 h-48 border border-blue-300"} icon={<FaImage className="opacity-50" size={96} />} />
+        <LabelContainer componentType="locationlogo" label="" showLabel={false} sublabel="Location Logo" path={path} className={"bg-blue-100 text-blue-800 h-48 border border-blue-300"} icon={<FaImage className="opacity-50" size={96} />} />
     );
 }

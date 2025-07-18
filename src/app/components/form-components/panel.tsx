@@ -1,12 +1,13 @@
 import LabelContainer from "./label-container";
 
 interface PanelProps {
+    path: string,
     label: string,
     children: React.ReactNode,
 }
 
-export default function Panel({ label, children }: PanelProps) {
+export default function Panel({ path, label, children }: PanelProps) {
     return (
-        <LabelContainer label={label} showLabel={true} sublabel="Panel" required={false} className={"bg-white border-zinc-300 border shadow text-zinc-700"} columnSizes={[12]} columnContent={[children]} />
+        <LabelContainer componentType="panel" label={label} showLabel={true} sublabel="Panel" path={path} required={false} className={"bg-white border-zinc-300 border shadow text-zinc-700"} columnSizes={[12]} columnContent={[children]} />
     );
 }

@@ -2,9 +2,22 @@
 
 import { createContext, useContext, useState } from "react";
 
+interface SelectedComponent {
+    type: string,
+    path: string,
+    gearPosition: {
+        left: number,
+        top: number,
+    }
+}
+
 interface FormContextType {
     formData: any,
     setFormData: (newData: any) => void,
+    selectedComponent: SelectedComponent,
+    setSelectedComponent: (newData: SelectedComponent) => void,
+    showContextMenu: boolean,
+    setShowContextMenu: (setting: boolean) => void,
 }
 
 interface FormContextProps {
@@ -15,9 +28,18 @@ const FormDataContext = createContext<FormContextType | null>(null);
 
 export default function FormContext({ children }:FormContextProps) {
     const [formData, setFormData] = useState({});
+    const [selectedComponent, setSelectedComponent] = useState({
+        type: "",
+        path: "",
+        gearPosition: {
+            "left": 0,
+            "top": 0,
+        }
+    });
+    const [showContextMenu, setShowContextMenu] = useState(false);
 
     return (
-        <FormDataContext value={{ formData, setFormData }}>
+        <FormDataContext value={{ formData, setFormData, selectedComponent, setSelectedComponent, showContextMenu, setShowContextMenu }}>
             {children}
         </FormDataContext>
     )

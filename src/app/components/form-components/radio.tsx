@@ -1,12 +1,13 @@
 import LabelContainer from "./label-container";
 
 interface RadioProps {
+    path: string,
     label: string,
     required: boolean,
 }
 
-export default function Radio({ label, required }: RadioProps) {
+export default function Radio({ path, label, required }: RadioProps) {
     return (
-        <LabelContainer label={label} showLabel={true} sublabel="Radio" required={required} className={"bg-green-100 text-green-800 border border-green-300"} />
+        <LabelContainer componentType="radio" label={label} showLabel={true} sublabel="Radio" path={path} required={required} className={"bg-green-100 text-green-800 border border-green-300"} />
     );
 }

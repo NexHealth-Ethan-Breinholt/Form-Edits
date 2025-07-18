@@ -49,13 +49,13 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
             }
 
             const children = data['components'].map((component: string, index: number) => {
-                return exploreComponent(component, index);
+                return exploreComponent(component, index, "components." + index);
             });
 
-            return <Panel label={data['label']}>{children}</Panel>
+            return <Panel path="" label={data['label']}>{children}</Panel>
         }
 
-        const exploreComponent = (data: any, index: number) => {
+        const exploreComponent = (data: any, index: number, currentPath: string) => {
             const type = getType(data['type']);
 
             switch (type) {
@@ -69,7 +69,7 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
                         const columnElements: React.ReactNode[] = [];
 
                         data['columns'][columnId]['components'].map((component: any, index: number) => {
-                            columnElements.push(exploreComponent(component, index));
+                            columnElements.push(exploreComponent(component, index, currentPath + "." + index));
                         });
 
                         columnContents.push(<>{columnElements}</>);
@@ -78,43 +78,52 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
                     return <Columns
                         key={index}
                         columnSizes={columnSizes}
-                        columnsContent={columnContents} />;
+                        columnsContent={columnContents}
+                        path={currentPath} />;
                 case "content":
                     return <Content
                         key={index}
-                        label={data['html']} />
+                        label={data['html']}
+                        path={currentPath} />
                 case "date":
                     return <Date
                         key={index}
                         label={data['label']}
-                        required={data['validate']['required']} />
+                        required={data['validate']['required']}
+                        path={currentPath} />
                 case "locationlogo":
                     return <LocationLogo
-                        key={index} />
+                        key={index}
+                        path={currentPath} />
                 case "radio":
                     return <Radio
                         key={index}
                         label={data['label']}
-                        required={data['validate']['required']} />
+                        required={data['validate']['required']}
+                        path={currentPath} />
                 case "signature":
                     return <Signature
                         key={index}
                         label={data['label']}
-                        required={data['validate']['required']} />
+                        required={data['validate']['required']}
+                        path={currentPath} />
                 case "textfield":
                     return <Textfield
                         key={index}
                         label={data['label']}
-                        required={data['validate']['required']} />
+                        required={data['validate']['required']}
+                        path={currentPath} />
                 case "paymentmethod":
                     return <PaymentMethod
                         key={index}
                         label={data['label']}
-                        required={data['validate']['required']} />
+                        required={data['validate']['required']}
+                        path={currentPath} />
                 default:
                     return <Unimplemented 
                         key={index}    
-                        type={type} />
+                        type={type}
+                        path={currentPath} />
             }
         }
 
