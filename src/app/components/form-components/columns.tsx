@@ -7,6 +7,6 @@ interface Columns {
 
 export default function Columns({ columnSizes, columnsContent }: Columns) {
     return (
-        <LabelContainer label="" showLabel={false} sublabel="Columns" required={false} className={"bg-white border border-zinc-300"} columnSizes={columnSizes} columnContent={columnsContent} />
+        <LabelContainer label="" showLabel={false} sublabel="Columns" required={false} className={"bg-zinc-200"} columnSizes={columnSizes} columnContent={columnsContent} />
     );
 }
