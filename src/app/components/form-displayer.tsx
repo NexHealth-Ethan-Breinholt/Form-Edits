@@ -51,7 +51,7 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
                 return exploreComponent(component, index, "components." + index);
             });
 
-            return <Panel path="" label={data['label']}>{children}</Panel>
+            return <Panel type={data['type']} path="" label={data['label']}>{children}</Panel>
         }
 
         const exploreComponent = (data: any, index: number, currentPath: string) => {
@@ -79,6 +79,7 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
 
                     return <Columns
                         key={index}
+                        type={type}
                         columnSizes={columnSizes}
                         columnsContent={columnContents}
                         path={currentPath}
@@ -88,6 +89,7 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
                     return <Content
                         key={index}
                         label={data['html']}
+                        type={type}
                         path={currentPath}
                         disabled={disabled}
                         hidden={hidden} />
@@ -95,6 +97,7 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
                     return <Date
                         key={index}
                         label={data['label']}
+                        type={type}
                         required={data['validate']['required']}
                         path={currentPath}
                         disabled={disabled}
@@ -102,6 +105,7 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
                 case "locationlogo":
                     return <LocationLogo
                         key={index}
+                        type={type}
                         path={currentPath}
                         disabled={disabled}
                         hidden={hidden} />
@@ -109,6 +113,7 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
                     return <Radio
                         key={index}
                         label={data['label']}
+                        type={type}
                         required={data['validate']['required']}
                         path={currentPath}
                         disabled={disabled}
@@ -117,6 +122,7 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
                     return <Signature
                         key={index}
                         label={data['label']}
+                        type={type}
                         required={data['validate']['required']}
                         path={currentPath}
                         disabled={disabled}
@@ -125,6 +131,7 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
                     return <Textfield
                         key={index}
                         label={data['label']}
+                        type={type}
                         required={data['validate']['required']}
                         path={currentPath}
                         disabled={disabled}
@@ -133,6 +140,7 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
                     return <PaymentMethod
                         key={index}
                         label={data['label']}
+                        type={type}
                         required={data['validate']['required']}
                         path={currentPath}
                         disabled={disabled}

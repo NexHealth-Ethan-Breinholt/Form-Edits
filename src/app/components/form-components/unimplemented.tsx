@@ -14,7 +14,7 @@ export default function Unimplemented({ label, path, type, disabled, hidden }: U
             componentType="unimplemented"
             label={label}
             showLabel={true}
-            sublabel={`Unimplemented - ${type}`}
+            sublabel={`unimplemented - ${type}`}
             path={path}
             required={false}
             className={"bg-zinc-100 text-zinc-800 border border-zinc-300"}

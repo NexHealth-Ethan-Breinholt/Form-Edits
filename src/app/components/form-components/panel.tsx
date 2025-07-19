@@ -3,18 +3,19 @@ import LabelContainer from "./label-container";
 interface PanelProps {
     path: string,
     label: string,
+    type: string,
     children: React.ReactNode,
     disabled?: boolean,
     hidden?: boolean,
 }
 
-export default function Panel({ path, label, children, disabled, hidden }: PanelProps) {
+export default function Panel({ path, label, type, children, disabled, hidden }: PanelProps) {
     return (
         <LabelContainer
             componentType="panel"
             label={label}
             showLabel={true}
-            sublabel="Panel"
+            sublabel={type}
             path={path}
             showSettingsButton={false}
             required={false}
