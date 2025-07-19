@@ -32,7 +32,6 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
                         throw new Error(`Failed to fetch file! ${response.status}`);
                     }
                     const data = await response.json();
-                    console.log(data);
                     setFormData(data);
                     setFetchedForm(true);
                 }
@@ -69,7 +68,7 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
                         const columnElements: React.ReactNode[] = [];
 
                         data['columns'][columnId]['components'].map((component: any, index: number) => {
-                            columnElements.push(exploreComponent(component, index, currentPath + "." + index));
+                            columnElements.push(exploreComponent(component, index, currentPath + ".columns." + columnId + "." + index));
                         });
 
                         columnContents.push(<>{columnElements}</>);

@@ -9,13 +9,15 @@ const BASE_COLUMN_DATA = {
 }
 
 function evenlyDisperseWithinColumns(data: any, path: string, numberOfColumns: number) {
+    const clonedData = structuredClone(data);
+
     if (12 % numberOfColumns !== 0) {
         console.error(`Invalid value provided for number of columns! ${numberOfColumns} was provided, but 12 must be evenly divisble by it.`);
         return null;
     }
     const columnWidth = 12 / numberOfColumns;
 
-    const pathData = parseJsonPath(data, path);
+    const pathData = parseJsonPath(clonedData, path);
     if (pathData === null) {
         console.error("pathData returned null! Unable to continue.");
         return null;
@@ -23,9 +25,9 @@ function evenlyDisperseWithinColumns(data: any, path: string, numberOfColumns: n
 
     const containedComponents = [];
 
-    for (const columnID in pathData.parent[pathData.lastKey]) {
-        for (const componentID in pathData.parent[pathData.lastKey][columnID]['components']) {
-            containedComponents.push(pathData.parent[pathData.lastKey][columnID]['components'][componentID]);
+    for (const columnID in pathData.parent[pathData.lastKey]["columns"]) {
+        for (const componentID in pathData.parent[pathData.lastKey]["columns"][columnID]['components']) {
+            containedComponents.push(pathData.parent[pathData.lastKey]["columns"][columnID]['components'][componentID]);
         }
     }
 
@@ -46,7 +48,9 @@ function evenlyDisperseWithinColumns(data: any, path: string, numberOfColumns: n
          });
     }
 
-    pathData.parent[pathData.lastKey] = columnData;
+    pathData.parent[pathData.lastKey]["columns"] = columnData;
+
+    return clonedData;
 }
 
 export { evenlyDisperseWithinColumns }

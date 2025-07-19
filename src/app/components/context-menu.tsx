@@ -5,9 +5,9 @@ import getContextMenuOptions from "../lib/context-menu-options";
 import { useFormContext } from "./form-context"
 
 export default function ContextMenu() {
-    const { formData, selectedComponent, setSelectedComponent, showContextMenu, setShowContextMenu } = useFormContext();
-    
-    const menuOptions = getContextMenuOptions(selectedComponent.type, formData, selectedComponent.path);
+    const { formData, setFormData, selectedComponent, setSelectedComponent, showContextMenu, setShowContextMenu } = useFormContext();
+
+    const menuOptions = getContextMenuOptions(selectedComponent.type, formData, selectedComponent.path, setFormData);
     const menuRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -37,7 +37,7 @@ export default function ContextMenu() {
     }
 
     return (
-        <div className="relative">
+        <div className="relative text-zinc-700">
             <div ref={menuRef} style={{
                 left: selectedComponent.gearPosition.left,
                 top: selectedComponent.gearPosition.top,
@@ -45,21 +45,23 @@ export default function ContextMenu() {
                 <ul>
                     {
                         Object.entries(menuOptions).map(([key, value], index) => {
-                            console.log(typeof(value));
+                            const onClickAction = typeof value === "object" && Object.keys(value).includes("action") ? value["action"] : typeof value === "function" ? value : null;
 
-                            if (typeof value === 'object') {
-                                // TODO: Check if there are sub-options.
-                            }
+                            const additionalStyling = typeof value === "object" && Object.keys(value).includes("style") ? value["style"] : "";
 
-                            return <li key={index} className="relative group text-sm text-zinc-700 px-2 py-[2px] hover:bg-zinc-100 cursor-pointer">
+                            return <li key={index} className={`relative group flex items-center gap-2 text-sm px-3 py-[2px] hover:bg-zinc-100 cursor-pointer ${additionalStyling}`} onClick={onClickAction}>
+                                {typeof value === "object" && Object.keys(value).includes("icon") && value["icon"]}
                                 {key}
-                                <ul className="hidden group-hover:block absolute bg-white border border-zinc-300 min-w-8 rounded-md left-[100%] -top-2 py-2 shadow">
-                                    <li className="px-2 hover:bg-zinc-100 cursor-pointer">1</li>
-                                    <li className="px-2 hover:bg-zinc-100 cursor-pointer">2</li>
-                                    <li className="px-2 hover:bg-zinc-100 cursor-pointer">3</li>
-                                    <li className="px-2 hover:bg-zinc-100 cursor-pointer">4</li>
-                                    <li className="px-2 hover:bg-zinc-100 cursor-pointer">6</li>
-                                </ul>
+                                {typeof value === "object" && Object.keys(value).includes("sub-options") && <ul className="hidden group-hover:block absolute bg-white border border-zinc-300 min-w-8 rounded-md left-[100%] -top-[9px] py-2 shadow">
+                                    {
+                                        Object.entries(value['sub-options']).map(([key, value], index) => {
+                                            if (typeof value === "function") {
+                                                return <li key={index} className="px-2 hover:bg-zinc-100 cursor-pointer py-[2px]" onClick={() => value()}>{key}</li>;
+                                            }
+                                            return null;
+                                        })
+                                    }
+                                </ul>}
                             </li>
                         })
                     }
