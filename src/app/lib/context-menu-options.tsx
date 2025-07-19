@@ -4,7 +4,7 @@ import { FaTableColumns, FaTrash, FaEyeSlash } from "react-icons/fa6";
 import { RxLetterCaseCapitalize } from "react-icons/rx";
 
 export default function getContextMenuOptions(componentType: string, data: any, path: string, setFormData: (data: any) => void) {
-    let options = null;
+    let specificOptions = null;
 
     const runFormChangingAction = (action: () => any) => {
 
@@ -12,9 +12,17 @@ export default function getContextMenuOptions(componentType: string, data: any, 
 
     }
 
+    const universalOptions = {
+        "Delete": {
+            "icon": <FaTrash />,
+            "action": () => {console.log("You clicked the trash button!")},
+            "style": "text-red-500",
+        },
+    }
+
     switch (componentType) {
         case "columns":
-            options = {
+            specificOptions = {
                 "Split Into Columns": {
                     "icon": <FaTableColumns className="text-zinc-600" />,
                     "sub-options": {
@@ -39,15 +47,10 @@ export default function getContextMenuOptions(componentType: string, data: any, 
                     "icon": <FaEyeSlash />,
                     "action": () => runFormChangingAction(deleteHidden(data, path)),
                 },
-                "Delete": {
-                    "icon": <FaTrash />,
-                    "action": () => {console.log("You clicked the trash button!")},
-                    "style": "text-red-500",
-                },
             }
             break;
         case "radio":
-            options = {
+            specificOptions = {
                 "Test 0": "",
                 "Test 1": "",
                 "Test 2": ""
@@ -55,5 +58,5 @@ export default function getContextMenuOptions(componentType: string, data: any, 
             break;
     }
     
-    return options;
+    return {...specificOptions, ...universalOptions};
 }
