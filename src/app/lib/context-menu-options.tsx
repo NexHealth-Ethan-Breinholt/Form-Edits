@@ -1,6 +1,7 @@
-import { evenlyDisperseWithinColumns } from "./column-utils"
+import { capitalizationPattern, capitalizeContainedLabels, evenlyDisperseWithinColumns } from "./column-utils"
 
 import { FaTableColumns, FaTrash } from "react-icons/fa6";
+import { RxLetterCaseCapitalize } from "react-icons/rx";
 
 export default function getContextMenuOptions(componentType: string, data: any, path: string, setFormData: (data: any) => void) {
     let options = null;
@@ -17,6 +18,15 @@ export default function getContextMenuOptions(componentType: string, data: any, 
                         "4": () => setFormData(evenlyDisperseWithinColumns(data, path, 4)),
                         "6": () => setFormData(evenlyDisperseWithinColumns(data, path, 6)),
                         "12": () => setFormData(evenlyDisperseWithinColumns(data, path, 12)),
+                    }
+                },
+                "Capitalization": {
+                    "icon": <RxLetterCaseCapitalize className="text-zinc-600" />,
+                    "sub-options": {
+                        "All Lowercase": () => setFormData(capitalizeContainedLabels(data, path, capitalizationPattern.allLowercase)),
+                        "All Uppercase": () => setFormData(capitalizeContainedLabels(data, path, capitalizationPattern.allUppercase)),
+                        "First Word": () => setFormData(capitalizeContainedLabels(data, path, capitalizationPattern.firstWord)),
+                        "Every Word": () => setFormData(capitalizeContainedLabels(data, path, capitalizationPattern.eachWord)),
                     }
                 },
                 "Delete": {

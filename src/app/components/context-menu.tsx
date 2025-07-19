@@ -66,7 +66,7 @@ export default function ContextMenu() {
                                     {
                                         Object.entries(value['sub-options']).map(([key, value], index) => {
                                             if (typeof value === "function") {
-                                                return <li key={index} className="px-2 hover:bg-zinc-100 cursor-pointer py-[2px]" onClick={() => value()}>{key}</li>;
+                                                return <li key={index} className="px-2 hover:bg-zinc-100 cursor-pointer py-[2px] whitespace-nowrap" onClick={() => value()}>{key}</li>;
                                             }
                                             return null;
                                         })

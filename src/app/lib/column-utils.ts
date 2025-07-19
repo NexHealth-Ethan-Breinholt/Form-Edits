@@ -53,4 +53,48 @@ function evenlyDisperseWithinColumns(data: any, path: string, numberOfColumns: n
     return clonedData;
 }
 
-export { evenlyDisperseWithinColumns }
+enum capitalizationPattern {
+    allLowercase,
+    allUppercase,
+    firstWord,
+    eachWord,
+}
+
+function capitalizeContainedLabels(data: any, path: string, pattern: capitalizationPattern) {
+    const clonedData = structuredClone(data);
+
+    const pathData = parseJsonPath(clonedData, path);
+    if (pathData === null) {
+        console.error("pathData returned null! Unable to continue.");
+        return null;
+    }
+
+    for (const columnID in pathData.parent[pathData.lastKey]["columns"]) {
+        for (const componentID in pathData.parent[pathData.lastKey]["columns"][columnID]['components']) {
+            const componentReference = pathData.parent[pathData.lastKey]["columns"][columnID]['components'][componentID];
+
+            if (componentReference && Object.keys(componentReference).includes("label")) {
+                switch (pattern) {
+                    case capitalizationPattern.allLowercase:
+                        componentReference["label"] = componentReference["label"].toLowerCase();
+                        break;
+                    case capitalizationPattern.allUppercase:
+                        componentReference["label"] = componentReference["label"].toUpperCase();
+                        break;
+                    case capitalizationPattern.firstWord:
+                        componentReference["label"] = componentReference["label"].charAt(0).toUpperCase() + componentReference["label"].slice(1).toLowerCase();
+                        break;
+                    case capitalizationPattern.eachWord:
+                        componentReference["label"] = componentReference["label"].split(" ").map((word: string) => {
+                            return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                        }).join(" ");
+                        break;
+                }
+            }
+        }
+    }
+
+    return clonedData;
+}
+
+export { evenlyDisperseWithinColumns, capitalizeContainedLabels, capitalizationPattern }
