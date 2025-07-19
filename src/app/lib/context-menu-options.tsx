@@ -1,6 +1,6 @@
-import { capitalizationPattern, capitalizeContainedLabels, evenlyDisperseWithinColumns } from "./column-utils"
+import { capitalizationPattern, capitalizeContainedLabels, deleteHidden, evenlyDisperseWithinColumns } from "./column-utils"
 
-import { FaTableColumns, FaTrash } from "react-icons/fa6";
+import { FaTableColumns, FaTrash, FaEyeSlash } from "react-icons/fa6";
 import { RxLetterCaseCapitalize } from "react-icons/rx";
 
 export default function getContextMenuOptions(componentType: string, data: any, path: string, setFormData: (data: any) => void) {
@@ -28,6 +28,10 @@ export default function getContextMenuOptions(componentType: string, data: any, 
                         "First Word": () => setFormData(capitalizeContainedLabels(data, path, capitalizationPattern.firstWord)),
                         "Every Word": () => setFormData(capitalizeContainedLabels(data, path, capitalizationPattern.eachWord)),
                     }
+                },
+                "Delete Hidden": {
+                    "icon": <FaEyeSlash />,
+                    "action": () => setFormData(deleteHidden(data, path)),
                 },
                 "Delete": {
                     "icon": <FaTrash />,

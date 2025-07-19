@@ -97,4 +97,34 @@ function capitalizeContainedLabels(data: any, path: string, pattern: capitalizat
     return clonedData;
 }
 
-export { evenlyDisperseWithinColumns, capitalizeContainedLabels, capitalizationPattern }
+function deleteHidden(data: any, path: string) {
+    const clonedData = structuredClone(data);
+
+    const pathData = parseJsonPath(clonedData, path);
+    if (pathData === null) {
+        console.error("pathData returned null! Unable to continue.");
+        return null;
+    }
+
+    for (const columnID in pathData.parent[pathData.lastKey]["columns"]) {
+        const componentsToKeep = [];
+
+        for (const componentID in pathData.parent[pathData.lastKey]["columns"][columnID]['components']) {
+            const componentReference = pathData.parent[pathData.lastKey]["columns"][columnID]['components'][componentID];
+
+            if (componentReference && Object.keys(componentReference).includes("hidden")) {
+                if (componentReference["hidden"] === true) {
+                    continue;
+                }
+
+                componentsToKeep.push(componentReference);
+            }
+        }
+
+        pathData.parent[pathData.lastKey]["columns"][columnID]['components'] = componentsToKeep;
+    }
+
+    return clonedData;
+}
+
+export { evenlyDisperseWithinColumns, capitalizeContainedLabels, capitalizationPattern, deleteHidden }
