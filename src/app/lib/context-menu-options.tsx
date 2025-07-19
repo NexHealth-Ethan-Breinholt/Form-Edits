@@ -1,7 +1,6 @@
 import { capitalizationPattern, capitalizeContainedLabels, deleteHidden, evenlyDisperseWithinColumns } from "./component-utils/column-utils"
 
-import { FaTableColumns, FaTrash, FaEyeSlash } from "react-icons/fa6";
-import { RxLetterCaseCapitalize } from "react-icons/rx";
+import { FaTableColumns, FaTrash, FaEyeSlash, FaA } from "react-icons/fa6";
 import { deleteComponent } from "./component-utils/universal-utils";
 
 export default function getContextMenuOptions(componentType: string, data: any, path: string, setFormData: (data: any) => void, hideContextMenu: () => void) {
@@ -36,7 +35,7 @@ export default function getContextMenuOptions(componentType: string, data: any, 
                     }
                 },
                 "Capitalization": {
-                    "icon": <RxLetterCaseCapitalize className="text-zinc-600" />,
+                    "icon": <FaA className="text-zinc-600" />,
                     "sub-options": {
                         "All Lowercase": () => runFormChangingAction(capitalizeContainedLabels(data, path, capitalizationPattern.allLowercase)),
                         "All Uppercase": () => runFormChangingAction(capitalizeContainedLabels(data, path, capitalizationPattern.allUppercase)),
