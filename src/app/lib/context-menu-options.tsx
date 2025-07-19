@@ -16,6 +16,7 @@ export default function getContextMenuOptions(componentType: string, data: any, 
                         "3": () => setFormData(evenlyDisperseWithinColumns(data, path, 3)),
                         "4": () => setFormData(evenlyDisperseWithinColumns(data, path, 4)),
                         "6": () => setFormData(evenlyDisperseWithinColumns(data, path, 6)),
+                        "12": () => setFormData(evenlyDisperseWithinColumns(data, path, 12)),
                     }
                 },
                 "Delete": {
