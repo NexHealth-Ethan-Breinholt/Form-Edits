@@ -4,10 +4,21 @@ interface TextareaProps {
     path: string,
     label: string,
     required: boolean,
+    disabled?: boolean,
+    hidden?: boolean,
 }
 
-export default function Textarea({ path, label, required }: TextareaProps) {
+export default function Textarea({ path, label, required, disabled, hidden }: TextareaProps) {
     return (
-        <LabelContainer componentType="textarea" label={label} showLabel={true} sublabel="Textarea" path={path} required={required} className={"bg-lime-100 text-lime-800 h-24 border border-lime-300"} />
+        <LabelContainer
+            componentType="textarea"
+            label={label}
+            showLabel={true}
+            sublabel="Textarea"
+            path={path}
+            required={required}
+            className={"bg-lime-100 text-lime-800 h-24 border border-lime-300"}
+            disabled={disabled}
+            hidden={hidden} />
     );
 }

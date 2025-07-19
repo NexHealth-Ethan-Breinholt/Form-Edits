@@ -57,6 +57,9 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
         const exploreComponent = (data: any, index: number, currentPath: string) => {
             const type = getType(data['type']);
 
+            const disabled = data["disabled"];
+            const hidden = data["hidden"];
+
             switch (type) {
                 case "columns":
                     const columnSizes = [];
@@ -78,51 +81,69 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
                         key={index}
                         columnSizes={columnSizes}
                         columnsContent={columnContents}
-                        path={currentPath} />;
+                        path={currentPath}
+                        disabled={disabled}
+                        hidden={hidden} />;
                 case "content":
                     return <Content
                         key={index}
                         label={data['html']}
-                        path={currentPath} />
+                        path={currentPath}
+                        disabled={disabled}
+                        hidden={hidden} />
                 case "date":
                     return <Date
                         key={index}
                         label={data['label']}
                         required={data['validate']['required']}
-                        path={currentPath} />
+                        path={currentPath}
+                        disabled={disabled}
+                        hidden={hidden} />
                 case "locationlogo":
                     return <LocationLogo
                         key={index}
-                        path={currentPath} />
+                        path={currentPath}
+                        disabled={disabled}
+                        hidden={hidden} />
                 case "radio":
                     return <Radio
                         key={index}
                         label={data['label']}
                         required={data['validate']['required']}
-                        path={currentPath} />
+                        path={currentPath}
+                        disabled={disabled}
+                        hidden={hidden} />
                 case "signature":
                     return <Signature
                         key={index}
                         label={data['label']}
                         required={data['validate']['required']}
-                        path={currentPath} />
+                        path={currentPath}
+                        disabled={disabled}
+                        hidden={hidden} />
                 case "textfield":
                     return <Textfield
                         key={index}
                         label={data['label']}
                         required={data['validate']['required']}
-                        path={currentPath} />
+                        path={currentPath}
+                        disabled={disabled}
+                        hidden={hidden} />
                 case "paymentmethod":
                     return <PaymentMethod
                         key={index}
                         label={data['label']}
                         required={data['validate']['required']}
-                        path={currentPath} />
+                        path={currentPath}
+                        disabled={disabled}
+                        hidden={hidden} />
                 default:
                     return <Unimplemented 
                         key={index}    
                         type={type}
-                        path={currentPath} />
+                        path={currentPath}
+                        disabled={disabled}
+                        hidden={hidden} />
             }
         }
 

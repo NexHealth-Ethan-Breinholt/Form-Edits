@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FaGear } from "react-icons/fa6";
+import { FaGear, FaBan, FaEyeSlash } from "react-icons/fa6";
 import { useFormContext } from "../form-context";
 
 interface LabelContainerProps {
@@ -15,18 +15,20 @@ interface LabelContainerProps {
     columnSizes?: number[],
     columnContent?: React.ReactNode[],
     showSettingsButton?: boolean,
+    disabled?: boolean,
+    hidden?: boolean,
 }
 
 const contextMenuHorizontalOffset = 4;
 const contextMenuVerticalOffset = -10;
 
-export default function LabelContainer({ componentType, label, showLabel, sublabel, path, required, className, icon, columnSizes, columnContent, showSettingsButton = true }: LabelContainerProps) {
+export default function LabelContainer({ componentType, label, showLabel, sublabel, path, required, className, icon, columnSizes, columnContent, disabled, hidden, showSettingsButton = true }: LabelContainerProps) {
     const remainingColumnSize = columnSizes != null ? 12 - columnSizes.reduce((acc, num) => acc + num, 0) : 0;
 
     const { selectedComponent, setSelectedComponent, setShowContextMenu } = useFormContext();
 
     return (
-        <div className={`relative p-4 rounded-md ${className} relative overflow-hidden`}>
+        <div className={`relative p-4 rounded-md ${className} relative overflow-hidden ${disabled || hidden ? "saturate-0" : ""}`}>
             {showSettingsButton && <button onClick={(e) => {
                 const rect = e.currentTarget.getBoundingClientRect();
                 setSelectedComponent({
@@ -43,8 +45,8 @@ export default function LabelContainer({ componentType, label, showLabel, sublab
             </button>}
 
             {icon && <div className="grid place-items-center inset-0 absolute">{icon}</div>}
-            {showLabel && <h2 className={required ? "required" : ""}>{label}</h2>}
-            <p className="text-xs opacity-50 italic">{sublabel}</p>
+            {showLabel && <h2 className={`${required ? "required" : ""}`}>{label}</h2>}
+            <p className={`text-xs opacity-50 italic flex items-center gap-1`}>{sublabel}{disabled && <FaBan />}{hidden && <FaEyeSlash />}</p>
             {columnSizes && <div className="grid grid-cols-12 gap-4 mt-4">
                 {columnSizes.map((size, index) => {
                     return (
