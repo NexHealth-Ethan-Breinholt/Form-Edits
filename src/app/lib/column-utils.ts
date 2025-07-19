@@ -73,7 +73,7 @@ function capitalizeContainedLabels(data: any, path: string, pattern: capitalizat
         for (const componentID in pathData.parent[pathData.lastKey]["columns"][columnID]['components']) {
             const componentReference = pathData.parent[pathData.lastKey]["columns"][columnID]['components'][componentID];
 
-            if (componentReference && Object.keys(componentReference).includes("label")) {
+            if (componentReference && "label" in componentReference) {
                 switch (pattern) {
                     case capitalizationPattern.allLowercase:
                         componentReference["label"] = componentReference["label"].toLowerCase();
@@ -112,7 +112,7 @@ function deleteHidden(data: any, path: string) {
         for (const componentID in pathData.parent[pathData.lastKey]["columns"][columnID]['components']) {
             const componentReference = pathData.parent[pathData.lastKey]["columns"][columnID]['components'][componentID];
 
-            if (componentReference && Object.keys(componentReference).includes("hidden")) {
+            if (componentReference && "hidden" in componentReference) {
                 if (componentReference["hidden"] === true) {
                     continue;
                 }

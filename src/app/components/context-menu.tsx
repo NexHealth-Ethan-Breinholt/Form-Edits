@@ -52,14 +52,14 @@ export default function ContextMenu() {
                 <ul>
                     {
                         Object.entries(menuOptions).map(([key, value], index) => {
-                            const onClickAction = typeof value === "object" && Object.keys(value).includes("action") ? value["action"] : typeof value === "function" ? value : null;
+                            const onClickAction = typeof value === "object" && "action" in value ? value["action"] : typeof value === "function" ? value : null;
 
-                            const additionalStyling = typeof value === "object" && Object.keys(value).includes("style") ? value["style"] : "";
+                            const additionalStyling = typeof value === "object" && "style" in value ? value["style"] : "";
 
-                            const containsSubOptions = typeof value === "object" && Object.keys(value).includes("sub-options");
+                            const containsSubOptions = typeof value === "object" && "sub-options" in value;
 
-                            return <li key={index} className={`relative group flex items-center gap-2 text-sm px-3 py-[2px] hover:bg-zinc-100 cursor-pointer ${additionalStyling}`} onClick={onClickAction}>
-                                {typeof value === "object" && Object.keys(value).includes("icon") && value["icon"]}
+                            return <li key={index} className={`relative group flex items-center gap-2 text-sm px-3 py-[2px] hover:bg-zinc-100 cursor-pointer ${additionalStyling}`} onClick={onClickAction === null ? () => {} : onClickAction}>
+                                {typeof value === "object" && "icon" in value && value["icon"]}
                                 {key}
                                 {containsSubOptions && <IoChevronForward />}
                                 {containsSubOptions && <ul className="hidden group-hover:block absolute bg-white border border-zinc-300 min-w-8 rounded-md left-[100%] -top-[9px] py-2 shadow">
