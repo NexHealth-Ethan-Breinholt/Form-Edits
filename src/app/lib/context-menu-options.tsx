@@ -6,7 +6,7 @@ import { RxLetterCaseCapitalize } from "react-icons/rx";
 export default function getContextMenuOptions(componentType: string, data: any, path: string, setFormData: (data: any) => void) {
     let options = null;
 
-    const runFormChangingFunction = (action: () => any) => {
+    const runFormChangingAction = (action: () => any) => {
 
         setFormData(action);
 
@@ -18,26 +18,26 @@ export default function getContextMenuOptions(componentType: string, data: any, 
                 "Split Into Columns": {
                     "icon": <FaTableColumns className="text-zinc-600" />,
                     "sub-options": {
-                        "1": () => runFormChangingFunction(evenlyDisperseWithinColumns(data, path, 1)),
-                        "2": () => runFormChangingFunction(evenlyDisperseWithinColumns(data, path, 2)),
-                        "3": () => runFormChangingFunction(evenlyDisperseWithinColumns(data, path, 3)),
-                        "4": () => runFormChangingFunction(evenlyDisperseWithinColumns(data, path, 4)),
-                        "6": () => runFormChangingFunction(evenlyDisperseWithinColumns(data, path, 6)),
-                        "12": () => runFormChangingFunction(evenlyDisperseWithinColumns(data, path, 12)),
+                        "1": () => runFormChangingAction(evenlyDisperseWithinColumns(data, path, 1)),
+                        "2": () => runFormChangingAction(evenlyDisperseWithinColumns(data, path, 2)),
+                        "3": () => runFormChangingAction(evenlyDisperseWithinColumns(data, path, 3)),
+                        "4": () => runFormChangingAction(evenlyDisperseWithinColumns(data, path, 4)),
+                        "6": () => runFormChangingAction(evenlyDisperseWithinColumns(data, path, 6)),
+                        "12": () => runFormChangingAction(evenlyDisperseWithinColumns(data, path, 12)),
                     }
                 },
                 "Capitalization": {
                     "icon": <RxLetterCaseCapitalize className="text-zinc-600" />,
                     "sub-options": {
-                        "All Lowercase": () => runFormChangingFunction(capitalizeContainedLabels(data, path, capitalizationPattern.allLowercase)),
-                        "All Uppercase": () => runFormChangingFunction(capitalizeContainedLabels(data, path, capitalizationPattern.allUppercase)),
-                        "First Word": () => runFormChangingFunction(capitalizeContainedLabels(data, path, capitalizationPattern.firstWord)),
-                        "Every Word": () => runFormChangingFunction(capitalizeContainedLabels(data, path, capitalizationPattern.eachWord)),
+                        "All Lowercase": () => runFormChangingAction(capitalizeContainedLabels(data, path, capitalizationPattern.allLowercase)),
+                        "All Uppercase": () => runFormChangingAction(capitalizeContainedLabels(data, path, capitalizationPattern.allUppercase)),
+                        "First Word": () => runFormChangingAction(capitalizeContainedLabels(data, path, capitalizationPattern.firstWord)),
+                        "Every Word": () => runFormChangingAction(capitalizeContainedLabels(data, path, capitalizationPattern.eachWord)),
                     }
                 },
                 "Delete Hidden": {
                     "icon": <FaEyeSlash />,
-                    "action": () => runFormChangingFunction(deleteHidden(data, path)),
+                    "action": () => runFormChangingAction(deleteHidden(data, path)),
                 },
                 "Delete": {
                     "icon": <FaTrash />,
