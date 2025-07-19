@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import getContextMenuOptions from "../lib/context-menu-options";
 import { useFormContext } from "./form-context"
+import { IoChevronForward } from "react-icons/io5";
 
 export default function ContextMenu() {
     const { formData, setFormData, selectedComponent, setSelectedComponent, showContextMenu, setShowContextMenu } = useFormContext();
@@ -21,14 +22,20 @@ export default function ContextMenu() {
                         top: 0,
                     }
                 })
-                setShowContextMenu(false);
+                hideContextMenu();
             }
         }
 
+        const hideContextMenu = () => {
+            setShowContextMenu(false);
+        }
+
         document.addEventListener("mousedown", handleClickOutsideOfMenu);
+        window.addEventListener("resize", hideContextMenu);
 
         return () => {
             document.removeEventListener("mousedown", handleClickOutsideOfMenu);
+            window.removeEventListener("resize", hideContextMenu);
         }
     });
 
@@ -49,10 +56,13 @@ export default function ContextMenu() {
 
                             const additionalStyling = typeof value === "object" && Object.keys(value).includes("style") ? value["style"] : "";
 
+                            const containsSubOptions = typeof value === "object" && Object.keys(value).includes("sub-options");
+
                             return <li key={index} className={`relative group flex items-center gap-2 text-sm px-3 py-[2px] hover:bg-zinc-100 cursor-pointer ${additionalStyling}`} onClick={onClickAction}>
                                 {typeof value === "object" && Object.keys(value).includes("icon") && value["icon"]}
                                 {key}
-                                {typeof value === "object" && Object.keys(value).includes("sub-options") && <ul className="hidden group-hover:block absolute bg-white border border-zinc-300 min-w-8 rounded-md left-[100%] -top-[9px] py-2 shadow">
+                                {containsSubOptions && <IoChevronForward />}
+                                {containsSubOptions && <ul className="hidden group-hover:block absolute bg-white border border-zinc-300 min-w-8 rounded-md left-[100%] -top-[9px] py-2 shadow">
                                     {
                                         Object.entries(value['sub-options']).map(([key, value], index) => {
                                             if (typeof value === "function") {
