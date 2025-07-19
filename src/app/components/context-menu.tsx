@@ -8,7 +8,11 @@ import { IoChevronForward } from "react-icons/io5";
 export default function ContextMenu() {
     const { formData, setFormData, selectedComponent, setSelectedComponent, showContextMenu, setShowContextMenu } = useFormContext();
 
-    const menuOptions = getContextMenuOptions(selectedComponent.type, formData, selectedComponent.path, setFormData);
+    const hideContextMenu = () => {
+        setShowContextMenu(false);
+    }
+
+    const menuOptions = getContextMenuOptions(selectedComponent.type, formData, selectedComponent.path, setFormData, hideContextMenu);
     const menuRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -24,10 +28,6 @@ export default function ContextMenu() {
                 })
                 hideContextMenu();
             }
-        }
-
-        const hideContextMenu = () => {
-            setShowContextMenu(false);
         }
 
         document.addEventListener("mousedown", handleClickOutsideOfMenu);

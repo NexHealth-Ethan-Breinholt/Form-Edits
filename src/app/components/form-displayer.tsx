@@ -71,7 +71,7 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
                         const columnElements: React.ReactNode[] = [];
 
                         data['columns'][columnId]['components'].map((component: any, index: number) => {
-                            columnElements.push(exploreComponent(component, index, currentPath + ".columns." + columnId + "." + index));
+                            columnElements.push(exploreComponent(component, index, currentPath + ".columns." + columnId + ".components." + index));
                         });
 
                         columnContents.push(<>{columnElements}</>);
@@ -140,6 +140,7 @@ export default function FormDisplayer({ filePath }:FormDisplayerProps) {
                 default:
                     return <Unimplemented 
                         key={index}    
+                        label={data['label']}
                         type={type}
                         path={currentPath}
                         disabled={disabled}

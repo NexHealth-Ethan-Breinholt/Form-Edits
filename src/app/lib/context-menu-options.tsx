@@ -1,21 +1,22 @@
-import { capitalizationPattern, capitalizeContainedLabels, deleteHidden, evenlyDisperseWithinColumns } from "./column-utils"
+import { capitalizationPattern, capitalizeContainedLabels, deleteHidden, evenlyDisperseWithinColumns } from "./component-utils/column-utils"
 
 import { FaTableColumns, FaTrash, FaEyeSlash } from "react-icons/fa6";
 import { RxLetterCaseCapitalize } from "react-icons/rx";
+import { deleteComponent } from "./component-utils/universal-utils";
 
-export default function getContextMenuOptions(componentType: string, data: any, path: string, setFormData: (data: any) => void) {
+export default function getContextMenuOptions(componentType: string, data: any, path: string, setFormData: (data: any) => void, hideContextMenu: () => void) {
     let specificOptions = null;
 
     const runFormChangingAction = (action: () => any) => {
 
         setFormData(action);
-
+        hideContextMenu();
     }
 
     const universalOptions = {
         "Delete": {
             "icon": <FaTrash />,
-            "action": () => {console.log("You clicked the trash button!")},
+            "action": () => runFormChangingAction(deleteComponent(data, path)),
             "style": "text-red-500",
         },
     }
