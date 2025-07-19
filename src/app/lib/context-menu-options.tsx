@@ -49,13 +49,6 @@ export default function getContextMenuOptions(componentType: string, data: any, 
                 },
             }
             break;
-        case "radio":
-            specificOptions = {
-                "Test 0": "",
-                "Test 1": "",
-                "Test 2": ""
-            }
-            break;
     }
     
     return {...specificOptions, ...universalOptions};
