@@ -9,13 +9,7 @@ function deleteComponent(data: any, path: string) {
         return null;
     }
 
-    console.log("-----");
-    console.log(path);
-    console.log(pathData);
-    console.log(pathData.parent[pathData.lastKey]);
-
     delete pathData.parent[pathData.lastKey];
-    console.log(clonedData);
 
     return clonedData;
 }

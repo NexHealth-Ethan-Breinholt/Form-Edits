@@ -13,7 +13,7 @@ function parseJsonPath(data: any, path: string) {
         };
     }
     else {
-        console.log("Failed to parse JSON path!");
+        console.error("Failed to parse JSON path!");
         return null;
     }
 }

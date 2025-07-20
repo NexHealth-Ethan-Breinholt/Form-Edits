@@ -11,7 +11,6 @@ export default function Home() {
           <div className="py-8 px-16">
             <div className="max-w-3xl m-auto">
               <FormDisplayer filePath="/form-examples/med-history-conditions.json" />
-              {/* <FormDisplayer filePath="/form-examples/cc-authorization.json" /> */}
             </div>
           </div>
         </main>
