@@ -1,6 +1,6 @@
 import { capitalizationPattern, capitalizeContainedLabels, deleteHidden, evenlyDisperseWithinColumns } from "./components/component-utils/column-utils"
 
-import { FaTableColumns, FaTrash, FaEyeSlash, FaA } from "react-icons/fa6";
+import { FaTableColumns, FaTrash, FaEyeSlash, FaA, FaArrowDownAZ } from "react-icons/fa6";
 import { deleteComponent } from "./components/component-utils/universal-utils";
 
 export default function getContextMenuOptions(componentType: string, data: any, path: string, setFormData: (data: any) => void, hideContextMenu: () => void) {
@@ -41,6 +41,13 @@ export default function getContextMenuOptions(componentType: string, data: any, 
                         "All Uppercase": () => runFormChangingAction(capitalizeContainedLabels(data, path, capitalizationPattern.allUppercase)),
                         "First Word": () => runFormChangingAction(capitalizeContainedLabels(data, path, capitalizationPattern.firstWord)),
                         "Every Word": () => runFormChangingAction(capitalizeContainedLabels(data, path, capitalizationPattern.eachWord)),
+                    }
+                },
+                "Alphabetize": {
+                    "icon": <FaArrowDownAZ className="text-zinc-600" />,
+                    "sub-options": {
+                        "A to Z": () => {},
+                        "Z to A": () => {},
                     }
                 },
                 "Delete Hidden": {
