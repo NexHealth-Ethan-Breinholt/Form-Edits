@@ -1,7 +1,7 @@
-import { capitalizationPattern, capitalizeContainedLabels, deleteHidden, evenlyDisperseWithinColumns } from "./component-utils/column-utils"
+import { capitalizationPattern, capitalizeContainedLabels, deleteHidden, evenlyDisperseWithinColumns } from "./components/component-utils/column-utils"
 
 import { FaTableColumns, FaTrash, FaEyeSlash, FaA } from "react-icons/fa6";
-import { deleteComponent } from "./component-utils/universal-utils";
+import { deleteComponent } from "./components/component-utils/universal-utils";
 
 export default function getContextMenuOptions(componentType: string, data: any, path: string, setFormData: (data: any) => void, hideContextMenu: () => void) {
     let specificOptions = null;

@@ -1,4 +1,4 @@
-import { parseJsonPath } from "../json-utils";
+import { parseJsonPath } from "../../json-utils";
 
 function deleteComponent(data: any, path: string) {
     const clonedData = structuredClone(data);

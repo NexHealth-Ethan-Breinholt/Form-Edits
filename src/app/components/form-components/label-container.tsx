@@ -2,7 +2,7 @@ import React from "react";
 
 import { FaGear, FaBan, FaEyeSlash } from "react-icons/fa6";
 import { useFormContext } from "../form-context";
-import { LabelContainerProps } from "@/app/lib/component-utils/component-props";
+import { LabelContainerProps } from "@/app/lib/components/component-props";
 
 const contextMenuHorizontalOffset = 4;
 const contextMenuVerticalOffset = -10;
