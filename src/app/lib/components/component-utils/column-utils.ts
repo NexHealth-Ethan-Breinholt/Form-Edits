@@ -1,4 +1,4 @@
-import { parseJsonPath } from "../json-utils";
+import { parseJsonPath } from "../../json-utils";
 
 const BASE_COLUMN_DATA = {
     "pull": 0,
