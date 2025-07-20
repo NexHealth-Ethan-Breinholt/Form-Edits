@@ -2,22 +2,7 @@ import React from "react";
 
 import { FaGear, FaBan, FaEyeSlash } from "react-icons/fa6";
 import { useFormContext } from "../form-context";
-
-interface LabelContainerProps {
-    componentType: string,
-    label: string,
-    showLabel: boolean,
-    sublabel: string,
-    path: string,
-    required?: boolean,
-    className?: string,
-    icon?: React.ReactNode,
-    columnSizes?: number[],
-    columnContent?: React.ReactNode[],
-    showSettingsButton?: boolean,
-    disabled?: boolean,
-    hidden?: boolean,
-}
+import { LabelContainerProps } from "@/app/lib/component-utils/component-props";
 
 const contextMenuHorizontalOffset = 4;
 const contextMenuVerticalOffset = -10;
