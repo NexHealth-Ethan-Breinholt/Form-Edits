@@ -127,4 +127,6 @@ function deleteHidden(data: any, path: string) {
     return clonedData;
 }
 
+// TODO: alphabetize, pull out of columns, add answer to radios
+
 export { evenlyDisperseWithinColumns, capitalizeContainedLabels, capitalizationPattern, deleteHidden }
