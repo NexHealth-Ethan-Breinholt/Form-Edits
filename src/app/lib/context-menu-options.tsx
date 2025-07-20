@@ -58,5 +58,5 @@ export default function getContextMenuOptions(componentType: string, data: any, 
             break;
     }
     
-    return {...specificOptions, ...universalOptions};
+    return {specificOptions, universalOptions};
 }
