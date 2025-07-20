@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import getContextMenuOptions from "../lib/context-menu-options";
 import { useFormContext } from "./form-context"
 import { IoChevronForward } from "react-icons/io5";
+import React from "react";
 
 interface ContextMenuOption {
     icon?: React.ReactNode,
@@ -21,7 +22,6 @@ export default function ContextMenu() {
 
     const menuOptions = getContextMenuOptions(selectedComponent.type, formData, selectedComponent.path, setFormData, hideContextMenu);
     const menuRef = useRef<HTMLDivElement>(null);
-    console.log(menuOptions);
 
     useEffect(() => {
         const handleClickOutsideOfMenu = (event: MouseEvent) => {
@@ -52,7 +52,11 @@ export default function ContextMenu() {
     }
 
     const convertOptionDataToElements = (optionData: any) => {
-        return Object.entries(optionData).map(([key, value], index) => {
+        const sortedOptionData = Object.fromEntries(
+            Object.entries(optionData).sort(([keyA], [keyB]) => keyA.localeCompare(keyB))
+        );
+
+        return Object.entries(sortedOptionData).map(([key, value], index) => {
             if (value === null) {
                 console.warn(`Got null value from key ${key} when attempting to create elements from option data!`);
                 return <></>
@@ -65,7 +69,7 @@ export default function ContextMenu() {
             const containsSubOptions = "sub-options" in menuOption;
             const containsIcon = "icon" in menuOption;
 
-            return <li key={index} className={`relative group flex items-center gap-2 text-sm px-3 py-[2px] hover:bg-zinc-100 cursor-pointer ${additionalStyling}`} onClick={onClickAction === null ? () => {} : onClickAction}>
+            return <li key={`menu-option-${index}`} className={`relative group flex items-center gap-2 text-sm px-3 py-[2px] hover:bg-zinc-100 cursor-pointer ${additionalStyling}`} onClick={onClickAction === null ? () => {} : onClickAction}>
                 {containsIcon && menuOption.icon}
                 {key}
                 {containsSubOptions && <IoChevronForward />}
@@ -73,7 +77,7 @@ export default function ContextMenu() {
                     {
                         Object.entries(menuOption['sub-options']!).map(([key, value], index) => {
                             if (typeof value === "function") {
-                                return <li key={index} className="px-2 hover:bg-zinc-100 cursor-pointer py-[2px] whitespace-nowrap" onClick={() => value()}>{key}</li>;
+                                return <li key={`menu-sub-ption-${index}`} className="px-2 hover:bg-zinc-100 cursor-pointer py-[2px] whitespace-nowrap" onClick={() => value()}>{key}</li>;
                             }
                             return null;
                         })
@@ -104,10 +108,10 @@ export default function ContextMenu() {
                             }
 
                             return (
-                                <>
-                                <li key={index} className="px-3 py-1 text-xs text-zinc-300 font-bold">{getSectionLabel(key)}</li>
-                                {optionElements}
-                                </>
+                                <React.Fragment key={`menu-section-${index}`}>
+                                    <li key={`menu-section-label-${index}`} className="px-3 py-1 text-xs text-zinc-300 font-bold">{getSectionLabel(key)}</li>
+                                    {optionElements}
+                                </React.Fragment>
                             );
                         })
                     }
