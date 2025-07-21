@@ -52,6 +52,10 @@ export default function ContextMenu() {
     }
 
     const convertOptionDataToElements = (optionData: any) => {
+        if (typeof optionData !== "object" || optionData === null) {
+            return null;
+        }
+
         const sortedOptionData = Object.fromEntries(
             Object.entries(optionData).sort(([keyA], [keyB]) => keyA.localeCompare(keyB))
         );
@@ -97,6 +101,10 @@ export default function ContextMenu() {
                     {
                         Object.entries(menuOptions).map(([key, value], index) => {
                             const optionElements = convertOptionDataToElements(value);
+
+                            if (optionElements === null) {
+                                return <React.Fragment key={`menu-section-${index}`}/>;
+                            }
 
                             const getSectionLabel = (key: string) => {
                                 switch (key) {
