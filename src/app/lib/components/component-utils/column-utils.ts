@@ -127,6 +127,47 @@ function deleteHidden(data: any, path: string) {
     return clonedData;
 }
 
-// TODO: alphabetize, pull out of columns, add answer to radios
+function alphabetize(data: any, path: string, reverse: boolean) {
+    const clonedData = structuredClone(data);
 
-export { evenlyDisperseWithinColumns, capitalizeContainedLabels, capitalizationPattern, deleteHidden }
+    const pathData = parseJsonPath(clonedData, path);
+    if (pathData === null) {
+        console.error("pathData returned null! Unable to continue.");
+        return null;
+    }
+
+    const containedComponents = [];
+    const numberOfColumns = pathData.parent[pathData.lastKey]["columns"].length;
+    console.log("Number of columns:", numberOfColumns);
+
+    const numOfComponentsPerColumn: number[] = [];
+
+    for (let i = 0; i < numberOfColumns; i++) {
+        let componentCount = 0;
+
+        for (const componentID in pathData.parent[pathData.lastKey]["columns"][i]['components']) {
+            containedComponents.push(pathData.parent[pathData.lastKey]["columns"][i]['components'][componentID]);
+            componentCount += 1;
+        }
+
+        numOfComponentsPerColumn[i] = componentCount;
+    }
+
+    containedComponents.sort((a, b) => a.label.localeCompare(b.label));
+
+    if (reverse) {
+        containedComponents.reverse();
+    }
+
+    for (let i = 0; i < numberOfColumns; i++) {
+        const columnComponents = containedComponents.splice(0, numOfComponentsPerColumn[i])
+
+        pathData.parent[pathData.lastKey]["columns"][i]['components'] = columnComponents;
+    }
+
+    return clonedData;
+}
+
+// TODO: pull out of columns, add answer to radios
+
+export { evenlyDisperseWithinColumns, capitalizeContainedLabels, capitalizationPattern, deleteHidden, alphabetize }
