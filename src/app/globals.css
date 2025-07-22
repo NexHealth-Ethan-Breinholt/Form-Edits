@@ -18,9 +18,9 @@ body {
   color: red;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   display: none;
-}
+} */
 
 button {
   cursor: pointer;
