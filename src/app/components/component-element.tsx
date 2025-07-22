@@ -18,7 +18,7 @@ export default function ComponentElement({ data, path, columnSizes, columnsConte
 
     const { selectedComponent, setSelectedComponent, setShowContextMenu } = useFormContext();
 
-    const label = "label" in data ? data.label : "";
+    const label = "html" in data ? data.html : "label" in data ? data.label : "";
     const type = "type" in data ? data.type : "unknown";
     const generalType = getGeneralType(type);
     const required = "required" in data.validate ? data.validate.required : false;
@@ -32,7 +32,6 @@ export default function ComponentElement({ data, path, columnSizes, columnsConte
     const showSettingsButton = "showSettingsButton" in metaData ? metaData.showSettingsButton as boolean : true;
         
     return (
-        // <div className={`relative p-4 text-black rounded-md bg-sync-100 border-sync-500 border overflow-hidden ${disabled || hidden ? "saturate-0" : ""}`}>
         <div className={`relative p-4 text-black rounded-md ${metaData.className} overflow-hidden ${disabled || hidden ? "saturate-0" : ""}`}>
             {showSettingsButton && <button onClick={(e) => {
                 const rect = e.currentTarget.getBoundingClientRect();
