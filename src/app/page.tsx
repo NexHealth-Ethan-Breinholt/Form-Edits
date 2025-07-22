@@ -19,8 +19,8 @@ export default function Home() {
             <h1 className="font-bold text-lg">NexHealth Form Edits</h1>
             <FormJsonInputField />
             <div className="flex gap-2 justify-end">
-              <button className="rounded-md px-4 py-1 bg-white border border-zinc-300 float-right font-bold shadow">Copy</button>
-              <button className="rounded-md px-4 py-1 bg-sync-200 float-right font-bold shadow">Apply</button>
+              <button className="rounded-md px-4 py-1 bg-white border border-zinc-300 float-right font-bold shadow hover:border-sync-500 transition-colors">Copy</button>
+              <button className="rounded-md px-4 py-1 bg-sync-500 float-right font-bold shadow hover:bg-sync-200 transition-colors">Apply</button>
             </div>
           </div>
         </main>
