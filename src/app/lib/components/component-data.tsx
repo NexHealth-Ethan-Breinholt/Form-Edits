@@ -1,52 +1,62 @@
 import { FaImage } from "react-icons/fa6";
 
+enum componentType {
+    static,
+    background,
+    input,
+    page,
+    unimplemented,
+}
+
 const componentMetaData = {
     columns: {
-        className: "bg-zinc-200",
         showLabel: false,
+        metaType: componentType.background,
     },
     content: {
-        className: "bg-yellow-100 border border-yellow-300",
         showLabel: true,
+        metaType: componentType.static,
     },
     date: {
-        className: "bg-indigo-100 border border-indigo-400",
         showLabel: true,
+        metaType: componentType.input,
     },
     locationlogo: {
-        className: "bg-blue-100 h-48 border border-blue-300",
+        className: "h-48",
         showLabel: false,
-        icon: <FaImage className="opacity-50" size={96} />
+        icon: <FaImage className="opacity-50" size={96} />,
+        metaType: componentType.static,
     },
     panel: {
-        className: "bg-white border-zinc-300 border shadow",
         showLabel: true,
         showSettingsButton: false,
+        metaType: componentType.page,
     },
     paymentmethod: {
-        className: "bg-amber-100 border border-amber-300",
         showLabel: true,
+        metaType: componentType.input,
     },
     radio: {
-        className: "bg-sync-100 border border-sync-500",
         showLabel: true,
+        metaType: componentType.input,
     },
     signature: {
-        className: "bg-orange-100 h-48 border border-orange-300",
+        className: "h-48",
         showLabel: true,
+        metaType: componentType.input,
     },
     textarea: {
-        className: "bg-lime-100 h-24 border border-lime-300",
+        className: "h-24",
         showLabel: true,
+        metaType: componentType.input,
     },
     textfield: {
-        className: "bg-sync-100 border border-sync-500",
         showLabel: true,
+        metaType: componentType.input,
     },
     unimplemented: {
-        className: "bg-zinc-100 border border-zinc-300",
         showLabel: true,
-        unimplemented: true,
+        metaType: componentType.unimplemented,
     },
 }
 
@@ -60,4 +70,21 @@ const getGeneralType = (value: string) => {
     return value;
 }
 
-export { componentMetaData, getGeneralType };
+const getComponentTypeStyle = (type: componentType) => {
+    switch (type) {
+        case componentType.background:
+            return "bg-zinc-200";
+        case componentType.input:
+            return "bg-sync-100 border border-sync-500";
+        case componentType.page:
+            return "bg-white border border-zinc-300 shadow";
+        case componentType.static:
+            return "bg-white border border-zinc-300";
+        case componentType.unimplemented:
+            return "bg-zinc-100 border border-zinc-300";
+        default:
+            return "";
+    }
+}
+
+export { componentType, getComponentTypeStyle, componentMetaData, getGeneralType };

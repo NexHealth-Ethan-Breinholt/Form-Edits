@@ -10,7 +10,8 @@ export default function Home() {
         <main className="grid grid-cols-[1fr_25%] h-screen">
           <div className="p-16 overflow-scroll">
             <div className="max-w-3xl m-auto">
-              <FormDisplayer filePath="/form-examples/cc-authorization.json" />
+              {/* <FormDisplayer filePath="/form-examples/cc-authorization.json" /> */}
+              <FormDisplayer filePath="/form-examples/med-history-conditions.json" />
             </div>
           </div>
           <div className="bg-white border-l border-zinc-300 p-8 text-black">

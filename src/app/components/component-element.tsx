@@ -3,7 +3,7 @@ import React from "react";
 import { FaGear, FaBan, FaEyeSlash } from "react-icons/fa6";
 import { useFormContext } from "./form-context";
 import { ComponentElementProps } from "@/app/lib/components/component-props";
-import { componentMetaData, getGeneralType } from "@/app/lib/components/component-data";
+import { componentMetaData, componentType, getComponentTypeStyle, getGeneralType } from "@/app/lib/components/component-data";
 
 const contextMenuHorizontalOffset = 4;
 const contextMenuVerticalOffset = -10;
@@ -26,13 +26,16 @@ export default function ComponentElement({ data, path, columnSizes, columnsConte
     const hidden = "hidden" in data ? data.hidden : false;
 
     const metaData = generalType in componentMetaData ? componentMetaData[generalType as keyof typeof componentMetaData] : componentMetaData.unimplemented;
-    const unimplemented = "unimplemented" in metaData ? metaData.unimplemented as boolean : false;
+    const metaType = "metaType" in metaData ? metaData.metaType : componentType.unimplemented;
 
     const icon = "icon" in metaData ? metaData.icon as React.ReactNode : null;
     const showSettingsButton = "showSettingsButton" in metaData ? metaData.showSettingsButton as boolean : true;
         
+    const componentTypeStyle = disabled || hidden ? "bg-zinc-200 border border-zinc-400" : getComponentTypeStyle(metaType);
+    const componentClassName = "className" in metaData ? metaData.className : "";
+
     return (
-        <div className={`relative p-4 text-black rounded-md ${metaData.className} overflow-hidden ${disabled || hidden ? "saturate-0" : ""}`}>
+        <div className={`relative p-4 text-black rounded-md ${componentTypeStyle} ${componentClassName} overflow-hidden`}>
             {showSettingsButton && <button onClick={(e) => {
                 const rect = e.currentTarget.getBoundingClientRect();
                 setSelectedComponent({
@@ -50,7 +53,7 @@ export default function ComponentElement({ data, path, columnSizes, columnsConte
 
             {icon && <div className="grid place-items-center inset-0 absolute">{icon}</div>}
             {metaData.showLabel && <h2 className={`${required ? "required" : ""}`}>{label}</h2>}
-            <p className={`text-xs opacity-50 italic flex items-center gap-1`}>{`${type}${unimplemented ? " - unimplemented" : ""}`}{disabled && <FaBan />}{hidden && <FaEyeSlash />}</p>
+            <p className={`text-xs opacity-50 italic flex items-center gap-1`}>{`${type}${metaType === componentType.unimplemented ? " - unimplemented" : ""}`}{disabled && <FaBan />}{hidden && <FaEyeSlash />}</p>
             {columnSizes && <div className="grid grid-cols-12 gap-4 mt-4">
                 {columnSizes.map((size, index) => {
                     return (
