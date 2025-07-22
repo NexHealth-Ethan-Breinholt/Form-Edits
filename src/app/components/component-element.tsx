@@ -44,7 +44,7 @@ export default function ComponentElement({ data, path, columnSizes, columnsConte
                     }
                 });
                 setShowContextMenu(true);
-            }} className={`absolute top-2 right-2 p-1 rounded-md grid place-items-center z-10 ${selectedComponent.path === path ? "" : ""}`}>
+            }} className={`absolute top-2 right-2 p-1 rounded-md grid place-items-center focus-within:ring-2 focus-within:ring-sync-200 z-10 ${selectedComponent.path === path ? "" : ""}`}>
                 <FaGear size={10} />
             </button>}
 

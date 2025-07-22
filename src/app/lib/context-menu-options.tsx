@@ -24,7 +24,7 @@ export default function getContextMenuOptions(componentType: string, data: any, 
         case "columns":
             specificOptions = {
                 "Split Into Columns": {
-                    "icon": <FaTableColumns className="text-zinc-600" />,
+                    "icon": <FaTableColumns />,
                     "sub-options": {
                         "1": () => runFormChangingAction(evenlyDisperseWithinColumns(data, path, 1)),
                         "2": () => runFormChangingAction(evenlyDisperseWithinColumns(data, path, 2)),
@@ -35,7 +35,7 @@ export default function getContextMenuOptions(componentType: string, data: any, 
                     }
                 },
                 "Capitalization": {
-                    "icon": <FaA className="text-zinc-600" />,
+                    "icon": <FaA />,
                     "sub-options": {
                         "All Lowercase": () => runFormChangingAction(capitalizeContainedLabels(data, path, capitalizationPattern.allLowercase)),
                         "All Uppercase": () => runFormChangingAction(capitalizeContainedLabels(data, path, capitalizationPattern.allUppercase)),
@@ -44,7 +44,7 @@ export default function getContextMenuOptions(componentType: string, data: any, 
                     }
                 },
                 "Alphabetize": {
-                    "icon": <FaArrowDownAZ className="text-zinc-600" />,
+                    "icon": <FaArrowDownAZ />,
                     "sub-options": {
                         "A to Z": () => runFormChangingAction(alphabetize(data, path, false)),
                         "Z to A": () => runFormChangingAction(alphabetize(data, path, true)),
