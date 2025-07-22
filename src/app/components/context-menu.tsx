@@ -73,7 +73,7 @@ export default function ContextMenu() {
             const containsSubOptions = "sub-options" in menuOption;
             const containsIcon = "icon" in menuOption;
 
-            return <li key={`menu-option-${index}`} className={`relative group flex items-center gap-2 text-sm px-3 py-[2px] hover:bg-zinc-100 cursor-pointer ${additionalStyling}`} onClick={onClickAction === null ? () => {} : onClickAction}>
+            return <li key={`menu-option-${index}`} className={`relative group flex items-center gap-2 text-sm px-3 py-1 hover:bg-zinc-100 cursor-pointer ${additionalStyling}`} onClick={onClickAction === null ? () => {} : onClickAction}>
                 {containsIcon && menuOption.icon}
                 {key}
                 {containsSubOptions && <IoChevronForward />}
@@ -81,7 +81,7 @@ export default function ContextMenu() {
                     {
                         Object.entries(menuOption['sub-options']!).map(([key, value], index) => {
                             if (typeof value === "function") {
-                                return <li key={`menu-sub-ption-${index}`} className="px-2 hover:bg-zinc-100 cursor-pointer py-[2px] whitespace-nowrap" onClick={() => value()}>{key}</li>;
+                                return <li key={`menu-sub-ption-${index}`} className="px-2 hover:bg-zinc-100 cursor-pointer py-1 whitespace-nowrap" onClick={() => value()}>{key}</li>;
                             }
                             return null;
                         })
@@ -90,6 +90,8 @@ export default function ContextMenu() {
             </li>
         })
     }
+
+    const numberOfOptionObjects = Object.entries(menuOptions).filter(([key, value]) => value !== null).length;
 
     return (
         <div className="relative text-zinc-700">
@@ -106,18 +108,10 @@ export default function ContextMenu() {
                                 return <React.Fragment key={`menu-section-${index}`}/>;
                             }
 
-                            const getSectionLabel = (key: string) => {
-                                switch (key) {
-                                    case "specificOptions":
-                                        return "Component Specific";
-                                    case "universalOptions":
-                                        return "Universal";
-                                }
-                            }
-
                             return (
                                 <React.Fragment key={`menu-section-${index}`}>
-                                    <li key={`menu-section-label-${index}`} className="px-3 py-1 text-xs text-zinc-300 font-bold">{getSectionLabel(key)}</li>
+                                    {numberOfOptionObjects > 1 && index <= numberOfOptionObjects && index > 0 && <hr className="text-zinc-300 my-2 mx-2" />}
+                                    {/* <li key={`menu-section-label-${index}`} className="px-3 py-1 text-xs text-zinc-300 font-bold">{getSectionLabel(key)}</li> */}
                                     {optionElements}
                                 </React.Fragment>
                             );
