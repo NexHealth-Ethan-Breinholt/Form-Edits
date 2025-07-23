@@ -1,7 +1,9 @@
 import ContextMenu from "./components/context-menu";
+import CopyButton from "./components/copy-button";
 import FormContext from "./components/form-context";
 import FormDisplayer from "./components/form-displayer";
 import FormJsonInputField from "./components/form-json-input-field";
+import SmallButton from "./components/small-button";
 
 export default function Home() {
   return (
@@ -19,8 +21,7 @@ export default function Home() {
             <h1 className="font-bold text-lg">NexHealth Form Edits</h1>
             <FormJsonInputField />
             <div className="flex gap-2 justify-end">
-              <button className="rounded-md px-4 py-1 bg-white border border-zinc-300 float-right font-bold shadow hover:border-sync-500 transition-colors">Copy</button>
-              <button className="rounded-md px-4 py-1 bg-sync-500 float-right font-bold shadow hover:bg-sync-200 transition-colors">Apply</button>
+              <CopyButton />
             </div>
           </div>
         </main>
