@@ -1,4 +1,4 @@
-import { FaBan, FaEyeSlash } from "react-icons/fa6";
+import { FaBan, FaEyeSlash, FaFilter } from "react-icons/fa6";
 
 export default function Legend() {
     return (
@@ -31,6 +31,10 @@ export default function Legend() {
                     <div className="flex items-center gap-2">
                         <FaBan className="text-zinc-600" />
                         Disabled
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <FaFilter className="text-zinc-600" />
+                        Conditional
                     </div>
                 </div>
             </div>

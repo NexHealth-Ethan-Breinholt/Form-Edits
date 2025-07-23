@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FaGear, FaBan, FaEyeSlash } from "react-icons/fa6";
+import { FaGear, FaBan, FaEyeSlash, FaFilter } from "react-icons/fa6";
 import { useFormContext } from "./form-context";
 import { ComponentElementProps } from "@/app/lib/components/component-props";
 import { componentMetaData, componentType, getComponentTypeStyle, getGeneralType } from "@/app/lib/components/component-data";
@@ -36,6 +36,8 @@ export default function ComponentElement({ data, path, columnSizes, columnsConte
     const componentTypeStyle = disabled || hidden ? "bg-zinc-200 border border-zinc-400" : getComponentTypeStyle(metaType);
     const componentClassName = "className" in metaData ? metaData.className : "";
 
+    const isConditional = "conditional" in data ? (data.conditional.show === null ? false : true) : false;
+
     return (
         <div className={`relative p-4 text-black rounded-md ${componentTypeStyle} ${componentClassName} overflow-hidden`}>
             {showSettingsButton && <button onClick={(e) => {
@@ -55,7 +57,7 @@ export default function ComponentElement({ data, path, columnSizes, columnsConte
 
             {icon && <div className="grid place-items-center inset-0 absolute">{icon}</div>}
             {metaData.showLabel && <h2 className={`${required ? "required" : ""}`}>{label}</h2>}
-            <p className={`text-xs opacity-50 italic flex items-center gap-1`}>{`${type}${metaType === componentType.unimplemented ? " - unimplemented" : ""}`}{disabled && <FaBan />}{hidden && <FaEyeSlash />}</p>
+            <p className={`text-xs opacity-50 italic flex items-center gap-1`}>{`${type}${metaType === componentType.unimplemented ? " - unimplemented" : ""}`}{disabled && <FaBan />}{hidden && <FaEyeSlash />}{isConditional && <FaFilter />}</p>
             {columnSizes && <div className="grid grid-cols-12 gap-4 mt-4">
                 {columnSizes.map((size, index) => {
                     return (
