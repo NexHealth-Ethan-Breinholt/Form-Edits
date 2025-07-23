@@ -70,7 +70,7 @@ const getGeneralType = (value: string) => {
     if (["text", "email", "address", "phoneNumber"].includes(value)) {
         return "textfield";
     }
-    if (["datetime"].includes(value)) {
+    if (["datetime", "day"].includes(value)) {
         return "date";
     }
     return value;
