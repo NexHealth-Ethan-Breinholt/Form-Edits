@@ -9,6 +9,10 @@ enum componentType {
 }
 
 const componentMetaData = {
+    button: {
+        showLabel: true,
+        metaType: componentType.input,
+    },
     checkbox: {
         showLabel: true,
         metaType: componentType.input,
