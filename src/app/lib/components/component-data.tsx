@@ -16,10 +16,16 @@ const componentMetaData = {
     content: {
         showLabel: true,
         metaType: componentType.static,
+        labelKey: "html",
     },
     date: {
         showLabel: true,
         metaType: componentType.input,
+    },
+    htmlelement: {
+        showLabel: true,
+        metaType: componentType.static,
+        labelKey: "content",
     },
     locationlogo: {
         className: "h-48",

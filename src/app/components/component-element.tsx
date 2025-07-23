@@ -18,7 +18,6 @@ export default function ComponentElement({ data, path, columnSizes, columnsConte
 
     const { selectedComponent, setSelectedComponent, setShowContextMenu } = useFormContext();
 
-    const label = "html" in data ? data.html : "label" in data ? data.label : "";
     const type = "type" in data ? data.type : "unknown";
     const generalType = getGeneralType(type);
     const required = "required" in data.validate ? data.validate.required : false;
@@ -27,6 +26,9 @@ export default function ComponentElement({ data, path, columnSizes, columnsConte
 
     const metaData = generalType in componentMetaData ? componentMetaData[generalType as keyof typeof componentMetaData] : componentMetaData.unimplemented;
     const metaType = "metaType" in metaData ? metaData.metaType : componentType.unimplemented;
+
+    const labelKey = "labelKey" in metaData ? metaData.labelKey as string : "label";
+    const label = labelKey in data ? data[labelKey] : "";
 
     const icon = "icon" in metaData ? metaData.icon as React.ReactNode : null;
     const showSettingsButton = "showSettingsButton" in metaData ? metaData.showSettingsButton as boolean : true;
