@@ -9,6 +9,10 @@ enum componentType {
 }
 
 const componentMetaData = {
+    checkbox: {
+        showLabel: true,
+        metaType: componentType.input,
+    },
     columns: {
         showLabel: false,
         metaType: componentType.background,
@@ -19,6 +23,10 @@ const componentMetaData = {
         labelKey: "html",
     },
     date: {
+        showLabel: true,
+        metaType: componentType.input,
+    },
+    file: {
         showLabel: true,
         metaType: componentType.input,
     },
@@ -37,12 +45,21 @@ const componentMetaData = {
         showLabel: true,
         showSettingsButton: false,
         metaType: componentType.page,
+        labelKey: "title",
     },
     paymentmethod: {
         showLabel: true,
         metaType: componentType.input,
     },
     radio: {
+        showLabel: true,
+        metaType: componentType.input,
+    },
+    select: {
+        showLabel: true,
+        metaType: componentType.input,
+    },
+    selectboxes: {
         showLabel: true,
         metaType: componentType.input,
     },
