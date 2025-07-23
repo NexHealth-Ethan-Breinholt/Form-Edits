@@ -55,6 +55,18 @@ export default function FormDisplayer() {
                 columnSizes={columnSizes}
                 columnsContent={columnsContent} />;
         }
+        else if (type === "panel") {
+            return <ComponentElement
+                key={index}
+                data={data}
+                path={currentPath}>
+                    {
+                        data.components.map((component: any, index: number) => {
+                            return exploreComponent(component, index, currentPath + ".components." + index);
+                        })
+                    }
+            </ComponentElement>;
+        }
 
         return <ComponentElement
             key={index}
