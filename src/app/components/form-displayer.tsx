@@ -28,7 +28,12 @@ export default function FormDisplayer({ filePath }: FormDisplayerProps) {
     }
 
     const exploreComponent = (data: any, index: number, currentPath: string) => {
-        const type = getGeneralType(data['type']);
+        if (!data) {
+            console.warn("Attempted to explore component but no data was provided!");
+            return <></>;
+        }
+
+        const type = "type" in data ? getGeneralType(data.type) : "unknown";
 
         if (type === "columns") {
             const columnSizes = [];
