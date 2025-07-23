@@ -12,7 +12,7 @@ export default function Home() {
       <FormContext>
         <ContextMenu />
         <main className="grid grid-cols-[1fr_25%] h-screen">
-          <div className="p-16 overflow-scroll">
+          <div className="p-16 overflow-y-scroll">
             <div className="max-w-3xl m-auto">
               <FormDisplayer />
             </div>
