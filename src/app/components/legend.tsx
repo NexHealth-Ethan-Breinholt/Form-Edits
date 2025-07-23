@@ -20,7 +20,7 @@ export default function Legend() {
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="bg-zinc-200 w-4 h-4 rounded-sm" />
-                        Background
+                        Container
                     </div>
                 </div>
                 <div>
