@@ -170,4 +170,6 @@ function alphabetize(data: any, path: string, reverse: boolean) {
 
 // TODO: pull out of columns, add answer to radios
 
+// TODO: make aplhabetize function work with labels that have a character at the start of them ("*pre-med - amox" for example)
+
 export { evenlyDisperseWithinColumns, capitalizeContainedLabels, capitalizationPattern, deleteHidden, alphabetize }
