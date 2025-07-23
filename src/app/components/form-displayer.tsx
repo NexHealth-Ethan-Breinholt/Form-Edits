@@ -5,15 +5,12 @@ import { useFormContext } from "./form-context";
 import ComponentElement from "./component-element";
 import { getGeneralType } from "../lib/components/component-data";
 
-interface FormDisplayerProps {
-    filePath: string,
-}
+const noDataToDisplayHTML = <div>No data to display</div>
 
-export default function FormDisplayer({ filePath }: FormDisplayerProps) {
+export default function FormDisplayer() {
     const { formData, setFormData } = useFormContext();
 
-    const [fetchedForm, setFetchedForm] = useState(false);
-    const [displayHTML, setDisplayHTML] = useState<React.ReactNode>();
+    const [displayHTML, setDisplayHTML] = useState<React.ReactNode>(noDataToDisplayHTML);
 
     const displayFormData = (data: any) => {
         if (!("components" in data)) {
@@ -66,29 +63,11 @@ export default function FormDisplayer({ filePath }: FormDisplayerProps) {
     }
 
     useEffect(() => {
-        const getFormData = async () => {
-            if (!fetchedForm) {
-                try {
-                    const response = await fetch(filePath)
-                    if (!response.ok) {
-                        throw new Error(`Failed to fetch file! ${response.status}`);
-                    }
-                    const data = await response.json();
-                    setFormData(data);
-                    setFetchedForm(true);
-                }
-                catch (error) {
-                    console.error("Failed to fetch form data:", error);
-                }
-            }
-        }
-
-        getFormData();
-    }, [filePath]);
-
-    useEffect(() => {
         if (formData) {
             setDisplayHTML(displayFormData(formData));
+        }
+        else {
+            setDisplayHTML(noDataToDisplayHTML);
         }
     }, [formData]);
 
